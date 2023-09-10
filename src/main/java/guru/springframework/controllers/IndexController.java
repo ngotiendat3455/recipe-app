@@ -21,13 +21,12 @@ import java.util.Set;
 public class IndexController {
     private final RecipeService recipeService;
 
-    public IndexController(RecipeServiceImp recipeService) {
+    public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model){
-        Set<Recipe> recipes = recipeService.getRecipes();
         model.addAttribute("recipes", recipeService.getRecipes());
         return "index";
     }
