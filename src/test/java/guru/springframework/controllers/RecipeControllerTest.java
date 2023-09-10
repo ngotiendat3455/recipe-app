@@ -44,4 +44,13 @@ public class RecipeControllerTest extends TestCase {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"));
     }
+
+    @Test
+    public void testDeleteRecipe() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc.perform(get("/recipe/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/"));
+        Mockito.verify(recipeService, Mockito.times(1)).deleteById(1L);
+    }
 }
